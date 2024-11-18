@@ -1,0 +1,152 @@
+function IsEmail(email) {
+	var regex = /^([a-zA-Z0-9_\.\-\+])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+	if (!regex.test(email)) {
+		return false;
+	} else {
+		return true;
+	}
+}
+
+$('.is_numeric').bind('keyup paste', function () {
+	// this.value = this.value.replace(/[^0-9]/g, '');
+	var valid = /^\d{0,10}(\.\d{0,3})?$/.test($(this).val()), val = this.value;
+	if (!valid) {
+		this.value = val.substring(0, val.length - 1);
+	}
+});
+
+$(document).on('keypress paste', '.is_alpha', function (e) {
+	var regex = new RegExp("^[a-zA-Z ]+$");
+	var strigChar = String.fromCharCode(!e.charCode ? e.which : e.charCode);
+	if (regex.test(strigChar)) {
+		return true;
+	}
+	return false
+});
+
+$(document).on('keypress paste', '.alpha_space', function (e) {
+	$(this).val($(this).val().replace(/(\s{2,})|[^a-zA-Z0-9']/g, ' '));
+	$(this).val($(this).val().replace(/^\s*/, ''));
+});
+
+$(document).on('keypress paste', '.alphanumeric', function (e) {
+	var regex = '';
+	regex = new RegExp("^[a-zA-Z0-9 ]+$");
+	// if($(this).hasClass('address') == true) {
+	//      regex = new RegExp("^[a-zA-Z0-9 ]+$");
+	// } else {
+	//      regex = new RegExp("^[a-zA-Z0-9]+$");
+	// }
+	var str = String.fromCharCode(!e.charCode ? e.which : e.charCode);
+	if (regex.test(str)) {
+		return true;
+	}
+	e.preventDefault();
+	return false;
+});
+
+$('.form-control').on('keypress keyup change', function () {
+	$(this).next().html('');
+
+	$('.login_err').html('');
+	$(".forgot_successMsg").hide();
+});
+
+$('.form-check-input').on('keypress keyup change', function () {
+	$('.type_err, .payment_err').html('');
+});
+
+$(document).on('submit', '.contact_frm', function (evt) {
+	var errCnt = 0;
+	var name = $("#name").val();
+	var email = $("#email").val();
+	var phone_no = $("#phone_no").val();
+	var message = $("#message").val();
+	if (name == '') {
+		$(".name_err").html('Name is required.');
+		errCnt = 1;
+	}
+	if (email == '') {
+		$(".email_err").html('Email ID is required.');
+		errCnt = 1;
+	} else if (IsEmail(email) == false) {
+		$(".email_err").html('Please enter valid Email ID.');
+		errCnt = 1;
+	}
+	if (phone_no == '') {
+		$(".phone_err").html('Phone No is required.');
+		errCnt = 1;
+	}
+	if (message == '') {
+		$(".msg_err").html('Message is required.');
+		errCnt = 1;
+	}
+	if (errCnt > 0) {
+		evt.preventDefault();
+		return false;
+	}
+	$.ajax({
+		type: 'POST',
+		url: 'RequestDispatcher/contactForm',
+		data: {name: name, email: email, phone_no: phone_no, message: message},
+		async: false,
+		success: function (resp) {
+			if (resp == 0) {
+				window.location.href = 'thank-you';
+				evt.preventDefault();
+				return false;
+			}
+		}
+	})
+});
+$(document).on('submit', '.cs_frm', function (evt) {
+	var errCnt = 0;
+	var sc_type = $("#sc_type").val();
+	var cs_name = $("#cs_name").val();
+	var cs_email = $("#cs_email").val();
+	var message = $("#message").val();
+	if (sc_type == '') {
+		$(".type_err").html('Type is required.');
+		errCnt = 1;
+	}
+	if (cs_name == '') {
+		$(".name_err").html('Name is required.');
+		errCnt = 1;
+	}
+	if (cs_email == '') {
+		$(".email_err").html('Email ID is required.');
+		errCnt = 1;
+	} else if (IsEmail(cs_email) == false) {
+		$(".email_err").html('Please enter valid Email ID.');
+		errCnt = 1;
+	}
+	if (message == '') {
+		$(".msg_err").html('Message is required.');
+		errCnt = 1;
+	}
+	if (errCnt > 0) {
+		evt.preventDefault();
+		return false;
+	}
+	$.ajax({
+		type: 'POST',
+		url: 'RequestDispatcher/complaintForm',
+		data: {sc_type: sc_type, cs_name: cs_name, cs_email: cs_email, message: message},
+		async: false,
+		success: function (resp) {
+			if (resp == 0) {
+				window.location.href = 'thank-you';
+				evt.preventDefault();
+				return false;
+			}
+		}
+	})
+});
+
+$(document).on('click', '.aicte', function (evt) {
+	$("#v-tabs-1-tab").removeClass('active');
+	$("#v-tabs-1").removeClass('show active')
+	$("#v-tabs-2-tab").addClass('active');
+	$("#v-tabs-2").addClass('show active')
+
+});
