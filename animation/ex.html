@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .name{
+            height:100px;
+            width: 200px;
+            position:relative;
+            background-color: gray;
+            animation-name: Hello;
+            animation-duration: 2s;
+        }
+        @keyframes Hello{
+            0% { right :0; transform:rotate(80dg);
+            }
+            100%{
+                right :80px; transform : rotate(160deg);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="name"></div>
+</body>
+</html>
