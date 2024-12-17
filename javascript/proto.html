@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!--Prototypal Inheritance-->
+    <script>
+        let one={
+            name:"kavya",
+            age:20
+        };
+        let two={
+            branch:"CSE",
+            year:2024
+        };
+        two.__proto__=one;
+        console.log(two.name);
+        console.log(two.year);
+    </script>
+</body>
+</html>

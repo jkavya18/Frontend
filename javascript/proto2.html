@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!--Prototype chaining-->
+    <script>
+        
+        let one={
+            name:"kavya",
+            age:20,
+            hey(){
+                coonsole.log("hey kavya");
+            }
+        };
+        let two={
+            branch:"CSE",
+            year:2024
+        };
+        let three={
+            say:"hai"
+        };
+        two.hey=function(){
+            console.log("hello kavya");
+        }
+        three.hey=function(){
+            console.log("haii kavya");
+        }
+        three.hey();
+        two.hey();
+        two.__proto__=one;
+        three.__proto__=two;
+        console.log(three.name);
+        console.log(two.age);
+       
+    </script>
+</body>
+</html>
