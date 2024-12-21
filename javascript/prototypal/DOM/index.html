@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+          body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background:gray;
+    color: #333;
+    justify-content: center;
+    align-items: center;
+}
+input{
+    width: 500px;
+  margin: auto;
+  border: 3px solid #73AD21;
+  align-items: center;
+  position: static;
+  justify-content: center;
+  padding: 20px;
+  margin: 40px;
+  font-size: medium;
+}
+
+h1 {
+    text-align: center;
+    color:purple;
+}
+#list{
+    color: blue;
+}
+button:hover{
+    color: magenta;
+}
+    </style>
+</head>
+
+<body>
+    <h1>TO Do List</h1>
+    <input type="text" id="inputData" placeholder="Enter data">
+    <button id="Adddata">Add Data</button>
+   <ul id="list"></ul>
+   <script>
+    let button=document.getElementById('Adddata');
+    let data=document.getElementById('data');
+    let list=document.getElementById('list');
+
+    button.addEventListener('click',function(){
+        if (inputData.value.trim()!==''){
+            let liElement=document.createElement("li");
+            liElement.textContent=inputData.value;
+            list.appendChild(liElement)
+            inputData.value=""
+            
+
+            let db=document.createElement("button");
+            db.textContent="Delete";
+            liElement.appendChild(db);
+            db.addEventListener("click",function(){
+                liElement.remove();
+            })
+        }
+    });
+    
+   </script>
+
+</body>
+</html>

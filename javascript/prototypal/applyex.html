@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var e1 = { firstName: "Jack", lastName: "Rodson" };
+var e2 = { firstName: "Queen", lastName: "Baily" };
+
+function invite(greeting1, greeting2) {
+  console.log(
+    greeting1 + " " + this.firstName + " " + this.lastName + ", " + greeting2
+  );
+}
+
+invite.apply(e1, ["Hello", "How are you?"]);  
+invite.apply(e2, ["Hello", "How are you?"]);  
+    </script>
+</body>
+</html>

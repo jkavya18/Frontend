@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var e1 = { firstName: "John", lastName: "Rodson" };
+var e2 = { firstName: "Jimmy", lastName: "Baily" };
+
+function invite(greeting1, greeting2) {
+  console.log(
+    greeting1 + " " + this.firstName + " " + this.lastName + ", " + greeting2
+  );
+}
+
+var inviteE1 = invite.bind(e1);
+var inviteE2 = invite.bind(e2);
+inviteE1("Hello", "How are you?");
+inviteE2("Hello", "How are you?"); 
+    </script>
+</body>
+</html>
